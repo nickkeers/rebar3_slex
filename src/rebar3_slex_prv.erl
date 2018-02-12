@@ -39,7 +39,9 @@ compile_slex(Source, Target, _Config) ->
     try slex_compiler:compile(Source, [{target, erl}, {out_dir, src}]) of
         {ok, _Mod, _Out} ->
             ok;
-        {ok, Target} -> ok;
+        {ok, Target} -> 
+            rebar_api:info("compiled slex file ~p -> ~p~n", [Source, Target]),
+            ok;
         {error, Error} ->
             rebar_api:debug("compile ~p -> ~p ~n  fail: ~P~n", [Source, Target, Error, 10]),
             rebar_base_compiler:error_tuple(Source, [{Source, [Error]}], [], [])
