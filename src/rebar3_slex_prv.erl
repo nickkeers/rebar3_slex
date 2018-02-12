@@ -2,7 +2,7 @@
 
 -export([init/1, do/1, format_error/1]).
 
--define(PROVIDER, rebar3_slex).
+-define(PROVIDER, compile).
 -define(DEPS, [app_discovery]).
 
 %% ===================================================================
