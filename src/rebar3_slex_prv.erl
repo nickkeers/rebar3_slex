@@ -22,8 +22,8 @@ init(State) ->
                                  {short_desc, "rebar3 plugin to compile slex files"},
                                  {desc, ""} 
     ]),
-    State2 = rebar_api:add_deps_to_path(State),
-    {ok, rebar_state:add_provider(State2, Provider)}.
+    rebar_api:add_deps_to_path(State),
+    {ok, rebar_state:add_provider(State, Provider)}.
 
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
