@@ -17,7 +17,7 @@ init(State) ->
                                  {deps, ?DEPS},
                                  {example, "rebar3 rebar3_slex compile"},
                                  {opts, [
-                                    {srcdir, $s, "srcdir", "src", "the source directory to copy .dtl.erl files to"}
+                                    {srcdir, $s, "srcdir", "src", "the source directory to copy slex .erl files to"}
                                  ]},
                                  {short_desc, "rebar3 plugin to compile slex files"},
                                  {desc, ""} 

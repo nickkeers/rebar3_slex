@@ -7,4 +7,5 @@
 
 -spec init(rebar_state:t()) -> {ok, rebar_state:t()}.
 init(State) ->
-    rebar3_slex_prv:init(State).
+    {ok, State2} = rebar3_slex_prv:init(State),
+    {ok, State2}.
