@@ -1,4 +1,5 @@
 -module(rebar3_slex_prv).
+-behaviour(provider).
 
 -export([init/1, do/1, format_error/1]).
 
