@@ -20,22 +20,12 @@ init(State) ->
                                  {short_desc, "rebar3 plugin to compile slex files"},
                                  {desc, ""} 
     ]),
-    rebar_api:add_deps_to_path(State),
     {ok, rebar_state:add_provider(State, Provider)}.
 
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-    {Args, _} = rebar_state:command_parsed_args(State),
-    State2 = do_slex_compile(),
-    case State2 of 
-        {error, _} ->
-            State2;
-        _ ->
-            % Restore our code path if we didn't get an error
-            _ = rebar_api:restore_code_path(State2),
-            {ok, State2}
-    end.
+    do_slex_compile().
 
 -spec format_error(any()) ->  iolist().
 format_error(Reason) ->
