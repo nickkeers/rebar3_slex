@@ -15,10 +15,8 @@ init(State) ->
                                  {module, ?MODULE},
                                  {bare, true},
                                  {deps, ?DEPS},
-                                 {example, "rebar3 rebar3_slex compile"},
-                                 {opts, [
-                                    {srcdir, $s, "srcdir", "src", "the source directory to copy slex .erl files to"}
-                                 ]},
+                                 {example, "rebar3 slex"},
+                                 {opts, []},
                                  {short_desc, "rebar3 plugin to compile slex files"},
                                  {desc, ""} 
     ]),
@@ -29,8 +27,7 @@ init(State) ->
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
     {Args, _} = rebar_state:command_parsed_args(State),
-    SrcOut = proplists:get_value(srcdir, Args),
-    State2 = do_slex_compile(SrcOut),
+    State2 = do_slex_compile(),
     case State2 of 
         {error, _} ->
             State2;
@@ -44,8 +41,8 @@ do(State) ->
 format_error(Reason) ->
     io_lib:format("~p", [Reason]).
 
-do_slex_compile(SrcOut) ->
-    rebar_base_compiler:run([], [], "src", ".slex", SrcOut, ".erl", fun compile_slex/3).
+do_slex_compile() ->
+    rebar_base_compiler:run([], [], "src", ".slex", "src", ".erl", fun compile_slex/3).
 
 compile_slex(Source, Target, _Config) ->
     try slex_compiler:compile(Source, [{target, erl}, {out_dir, src}]) of
