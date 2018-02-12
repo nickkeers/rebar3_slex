@@ -25,7 +25,8 @@ init(State) ->
 
 -spec do(rebar_state:t()) -> {ok, rebar_state:t()} | {error, string()}.
 do(State) ->
-    do_slex_compile().
+    do_slex_compile(),
+    {ok, State}.
 
 -spec format_error(any()) ->  iolist().
 format_error(Reason) ->
@@ -38,7 +39,6 @@ compile_slex(Source, Target, _Config) ->
     try slex_compiler:compile(Source, [{target, erl}, {out_dir, src}]) of
         {ok, _Mod, _Out} ->
             ok;
-        ok -> ok;
         {ok, Target} -> ok;
         {error, Error} ->
             rebar_api:debug("compile ~p -> ~p ~n  fail: ~P~n", [Source, Target, Error, 10]),
